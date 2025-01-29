@@ -1,15 +1,22 @@
 version: '3.1'
 
 services:
-  subgraphs:
+  weather_subgraph:
     build: ./src/subgraphs/weather
-    container_name: weather_demo_subgraph
     env_file:
       - .env
     volumes:
       - ./src/subgraphs/weather:/app
     ports:
       - 4000:4000
+  location_subgraph:
+    build: ./src/subgraphs/location
+    env_file:
+      - .env
+    volumes:
+      - ./src/subgraphs/location:/app
+    ports:
+      - 4040:4040
  
 volumes:
   pgdata:

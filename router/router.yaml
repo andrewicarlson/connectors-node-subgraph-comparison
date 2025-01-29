@@ -2,6 +2,17 @@ supergraph:
   # The socket address and port to listen on
   listen: 127.0.0.1:8000
 
+headers:
+  all:
+    request:
+      - propagate:
+          matching: .*
+
+telemetry:
+  instrumentation:
+    spans: 
+      mode: spec_compliant
+
 cors:
   # Set to true to allow any origin
   # (Defaults to false)
@@ -12,6 +23,9 @@ preview_connectors:
     weather-connector:
       $config:
         visualCrossingApiKey: "${env.VISUAL_CROSSING_API_KEY}"
+    location-connector:
+      $config:
+        trimbleApiKey: "${env.TRIMBLE_API_KEY}"
 
 
 

@@ -19,7 +19,7 @@ type ConnectorWeather {
 }
 
 type Query {
-  GetConnectorWeatherData (date:String, time:String, city:String, country:String) : ConnectorWeather
+  getConnectorWeatherData (date:String, time:String, city:String, country:String) : ConnectorWeather
     @connect(
         source: "weatherdata"
         http: { GET: "/VisualCrossingWebServices/rest/services/timeline/{$args.city},{$args.country}/{$args.date}T{$args.time}?key={$config.visualCrossingApiKey}&include=current&unitGroup=uk" }
