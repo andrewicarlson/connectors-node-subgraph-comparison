@@ -1,0 +1,12 @@
+extend schema @link(url: "https://specs.apollo.dev/federation/v2.10")
+
+type Query {
+  GetSubgraphWeatherData(city: String!, time: String!, date: String!, country: String!): SubgraphWeather
+}
+
+type SubgraphWeather {
+  temperature: Float
+  snow: Float
+  windSpeed: Float
+  conditions: String
+}

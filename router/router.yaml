@@ -1,0 +1,18 @@
+supergraph:
+  # The socket address and port to listen on
+  listen: 127.0.0.1:8000
+
+cors:
+  # Set to true to allow any origin
+  # (Defaults to false)
+  allow_any_origin: true
+
+preview_connectors:
+  subgraphs:
+    weather-connector:
+      $config:
+        visualCrossingApiKey: "${env.VISUAL_CROSSING_API_KEY}"
+
+
+
+

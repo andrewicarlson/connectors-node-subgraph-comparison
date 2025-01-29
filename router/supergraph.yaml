@@ -1,0 +1,14 @@
+federation_version: =2.10.0-preview.4
+
+subgraphs:
+  weather-connector:
+    routing_url:  http://ignored
+    schema:
+      file: ./src/schema/weather.graphql
+  weather-subgraph:
+    routing_url: http://localhost:4000
+    schema:
+      file: ./src/subgraphs/weather/src/schema/weather.graphql
+
+
+
