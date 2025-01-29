@@ -4,7 +4,7 @@ subgraphs:
   weather-connector:
     routing_url:  http://ignored
     schema:
-      file: ./src/schema/weather.graphql
+      file: ./src/connectors/weather.graphql
   weather-subgraph:
     routing_url: http://localhost:4000
     schema:
@@ -12,7 +12,7 @@ subgraphs:
   location-connector:
     routing_url:  http://ignored
     schema:
-      file: ./src/schema/location.graphql
+      file: ./src/connectors/location.graphql
   location-subgraph:
     routing_url: http://localhost:4040
     schema:
