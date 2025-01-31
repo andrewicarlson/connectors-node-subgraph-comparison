@@ -18,8 +18,6 @@ This repository contains a supergraph that compares Apollo Connectors to a tradi
 ```graphql
 query GetWeatherData {
     getSubgraphWeatherData(
-        date: "2025-01-28"
-        time: "14:00:00"
         city: "Amsterdam"
         country: "Netherlands"
     ) {
@@ -34,8 +32,6 @@ query GetWeatherData {
 ```graphql
 query GetWeatherData {
     getConnectorWeatherData(
-        date: "2025-01-28"
-        time: "14:00:00"
         city: "Amsterdam"
         country: "Netherlands"
     ) {
@@ -77,6 +73,44 @@ query locationByLatLng {
   connectorAddressByGeo(lat: "38.897675", long: "-77.036547") {
     shortFormatted
     timezone
+  }
+}
+```
+### Location and Weather join
+#### Subgraph
+```graphql
+query addressAndWeather {
+  subgraphAddressByGeo(lat: "38.897675", long: "-77.036547") {
+    shortFormatted
+    timezone
+    city
+    country
+    weather {
+      snow
+      temperature
+      windSpeed
+      conditions
+    }
+  }
+}
+```
+
+#### Connector
+Note that this is in a totally separate subgraph and doesn't use entities because resolving entities within a connector across subgraphs isn't currently supported. 
+
+```graphql
+query addressAndWeather {
+  connectorAddressAndWeather(lat: "38.897675", long: "-77.036547") {
+    shortFormatted
+    timezone
+    city
+    country
+    weather {
+      snow
+      temperature
+      windSpeed
+      conditions
+    }
   }
 }
 ```
