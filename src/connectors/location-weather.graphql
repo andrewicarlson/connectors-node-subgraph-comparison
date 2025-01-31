@@ -14,24 +14,46 @@ extend schema
       headers: [{ name: "Authorization", value: "{$config.trimbleApiKey}" }]
     }
   )
+  @source(
+    name: "weatherdata"
+      http: {
+      baseURL: "https://weather.visualcrossing.com/"
+      }
+  )
 
-type Address {
+type LWAddress {
   shortFormatted: String
   timezone: String!
   country: String!
   city: String!
+  weather: Weather!
+    @connect(
+        source: "weatherdata"
+        http: { GET: "/VisualCrossingWebServices/rest/services/timeline/{$this.city},{$this.country}?key={$config.visualCrossingApiKey}&include=current&unitGroup=uk" }
+        selection: """
+        $.currentConditions
+        {
+        snow
+        temperature: temp
+        windSpeed: windspeed
+        conditions
+        }
+        """
+      )
 }
 
-type Geo {
-  lat: String!
-  long: String!
+type Weather {
+  temperature: Float
+  snow: Float
+  windSpeed: Float
+  conditions: String
 }
 
 type Query {
   """
   PC*Miler Web Services - Single Search - https://developer.trimblemaps.com/restful-apis/location/single-search/single-search-api/
   """
-  connectorAddressByGeo(lat: String!, long: String!): Address
+  connectorAddressAndWeather(lat: String!, long: String!): LWAddress
     @connect(
       source: "trimblemaps"
       http: {
@@ -42,17 +64,6 @@ type Query {
       timezone:Locations->first.TimeZone
       city:Locations->first.Address.City
       country:Locations->first.Address.CountryFullName
-      """
-    )
-  connectorLocationByAddress(address: String!, city: String!, state: String!): Geo
-    @connect(
-      source: "trimblemaps"
-      http: {
-        GET: "na/api/search?query={$args.address},{$args.city}&countries=US&states={$args.state}"
-      }
-      selection: """
-      lat:Locations->first.Coords.Lat
-      long:Locations->first.Coords.Lon
       """
     )
 }

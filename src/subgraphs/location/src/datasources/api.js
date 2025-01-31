@@ -12,7 +12,9 @@ class LocationAPI extends RESTDataSource {
         
         return {
             shortFormatted: data.Locations[0].ShortString,
-            timezone: data.Locations[0].TimeZone
+            timezone: data.Locations[0].TimeZone,
+            country: data.Locations[0].Address.CountryFullName,
+            city: data.Locations[0].Address.City
         };
     }
 

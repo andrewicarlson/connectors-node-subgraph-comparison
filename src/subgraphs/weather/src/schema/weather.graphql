@@ -1,4 +1,4 @@
-extend schema @link(url: "https://specs.apollo.dev/federation/v2.8")
+extend schema @link(url: "https://specs.apollo.dev/federation/v2.8", import: ["@key", "@shareable"])
 
 type Query {
   getSubgraphWeatherData(city: String!, time: String!, date: String!, country: String!): SubgraphWeather

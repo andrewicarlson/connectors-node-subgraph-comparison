@@ -1,8 +1,10 @@
-extend schema @link(url: "https://specs.apollo.dev/federation/v2.8")
+extend schema @link(url: "https://specs.apollo.dev/federation/v2.8", import: ["@key", "@external", "@provides", "@shareable"])
 
 type SubgraphAddress {
   shortFormatted: String
   timezone: String!
+  country: String!
+  city: String!
 }
 
 type SubgraphGeo {

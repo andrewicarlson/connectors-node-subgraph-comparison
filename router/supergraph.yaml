@@ -17,3 +17,7 @@ subgraphs:
     routing_url: http://localhost:4040
     schema:
       file: ./src/subgraphs/location/src/schema/location.graphql
+  location-weather-connector:
+    routing_url: http://ignored
+    schema:
+      file: ./src/connectors/location-weather.graphql

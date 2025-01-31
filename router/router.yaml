@@ -26,7 +26,7 @@ preview_connectors:
     location-connector:
       $config:
         trimbleApiKey: "${env.TRIMBLE_API_KEY}"
-
-
-
-
+    location-weather-connector:
+      $config:
+        trimbleApiKey: "${env.TRIMBLE_API_KEY}"
+        visualCrossingApiKey: "${env.VISUAL_CROSSING_API_KEY}"
