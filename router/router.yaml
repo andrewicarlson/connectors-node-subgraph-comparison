@@ -20,13 +20,9 @@ cors:
 
 preview_connectors:
   subgraphs:
-    weather-connector:
+    weather:
       $config:
         visualCrossingApiKey: "${env.VISUAL_CROSSING_API_KEY}"
-    location-connector:
+    location:
       $config:
         trimbleApiKey: "${env.TRIMBLE_API_KEY}"
-    location-weather-connector:
-      $config:
-        trimbleApiKey: "${env.TRIMBLE_API_KEY}"
-        visualCrossingApiKey: "${env.VISUAL_CROSSING_API_KEY}"

@@ -1,0 +1,3 @@
+{
+  "query": "query geoByAddress {\n  geoByAddress(address: \"1600 Pennsylvania Ave NW\", city: \"Washington\", state: \"DC\") {\n    lat\n    long\n  }\n}"
+}

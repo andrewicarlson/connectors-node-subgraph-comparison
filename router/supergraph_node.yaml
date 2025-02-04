@@ -1,0 +1,11 @@
+federation_version: =2.10.0-preview.4
+
+subgraphs:
+  weather:
+    routing_url: http://localhost:4000
+    schema:
+      file: ./src/subgraphs/weather/src/schema/weather.graphql
+  location:
+    routing_url: http://localhost:4040
+    schema:
+      file: ./src/subgraphs/location/src/schema/location.graphql

@@ -1,7 +1,7 @@
 extend schema
   @link(
     url: "https://specs.apollo.dev/federation/v2.10"
-    import: ["@key", "@requires"]
+    import: ["@key"]
   )
   @link(
     url: "https://specs.apollo.dev/connect/v0.1"
@@ -25,13 +25,19 @@ type Address {
 type Geo {
   lat: String!
   long: String!
+  weather: Weather
+}
+
+type Weather @key(fields: "lat long", resolvable: false) {
+  lat: String!
+  long: String!
 }
 
 type Query {
   """
   PC*Miler Web Services - Single Search - https://developer.trimblemaps.com/restful-apis/location/single-search/single-search-api/
   """
-  connectorAddressByGeo(lat: String!, long: String!): Address
+  addressByGeo(lat: String!, long: String!): Address
     @connect(
       source: "trimblemaps"
       http: {
@@ -44,7 +50,8 @@ type Query {
       country:Locations->first.Address.CountryFullName
       """
     )
-  connectorLocationByAddress(address: String!, city: String!, state: String!): Geo
+
+  geoByAddress(address: String!, city: String!, state: String!): Geo
     @connect(
       source: "trimblemaps"
       http: {
@@ -53,6 +60,10 @@ type Query {
       selection: """
       lat:Locations->first.Coords.Lat
       long:Locations->first.Coords.Lon
+      weather: {
+        lat:Locations->first.Coords.Lat
+        long:Locations->first.Coords.Lon
+      }
       """
     )
 }

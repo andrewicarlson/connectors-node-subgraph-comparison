@@ -1,0 +1,3 @@
+{
+  "query": "query geoAndWeatherByAddress {\n  geoByAddress(address: \"1600 Pennsylvania Ave NW\", city: \"Washington\", state: \"DC\") {\n    lat\n    long\n    weather {\n      conditions\n      snow\n      temperature\n      windSpeed\n    }\n  }\n}"
+}

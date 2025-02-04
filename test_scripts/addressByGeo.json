@@ -1,0 +1,3 @@
+{
+  "query": "query addressByGeo {\n  addressByGeo(lat: \"38.897675\", long: \"-77.036547\") {\n    shortFormatted\n    timezone\n  }\n}"
+}

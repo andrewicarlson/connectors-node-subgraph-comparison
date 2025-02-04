@@ -1,14 +1,20 @@
 const resolvers = {
   Query: {
-    getSubgraphWeatherData: async (_, { city, country }, {dataSources}) => {
+    getWeatherData: async (_, { city, country }, {dataSources}) => {
       const data = await dataSources.weatherAPI.getWeather(city, country); 
 
       return data;
     },
+
+    getWeatherDataByLatLng: async (_, { lat, long }, {dataSources}) => {
+      const data = await dataSources.weatherAPI.getWeather(lat, long); 
+
+      return data;
+    },
   },
-  SubgraphWeather: {
-    __resolveReference({ city, country }, { dataSources }) {
-      return dataSources.weatherAPI.getWeather(city, country);
+  Weather: {
+    __resolveReference({ lat, long }, { dataSources }) {
+      return dataSources.weatherAPI.getWeather(lat, long);
     }
   }
 };

@@ -1,12 +1,13 @@
-extend schema @link(url: "https://specs.apollo.dev/federation/v2.8", import: ["@key", "@shareable"])
+extend schema @link(url: "https://specs.apollo.dev/federation/v2.8", import: ["@key"])
 
 type Query {
-  getSubgraphWeatherData(city: String!, country: String!): SubgraphWeather
+  getWeatherData(city: String!, country: String!): Weather
+  getWeatherDataByLatLng(lat: String!, long: String!): Weather
 }
 
-type SubgraphWeather @key(fields: "city country") {
-  city: String!
-  country: String!
+type Weather @key(fields: "lat long") {
+  lat: String!
+  long: String!
   temperature: Float!
   snow: Float!
   windSpeed: Float!

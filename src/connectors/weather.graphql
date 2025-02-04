@@ -1,27 +1,29 @@
 extend schema
-  @link(url: "https://specs.apollo.dev/federation/v2.10", import: ["@key"])
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.10", 
+    import: ["@key"])
   @link(
     url: "https://specs.apollo.dev/connect/v0.1"
-    import: ["@connect", "@source"]
+    import: ["@source", "@connect"]
+  )
+  @source(
+    name: "weatherdata"
+    http: {
+      baseURL: "https://weather.visualcrossing.com/"
+    }
   )
 
-@source(
- name: "weatherdata"
-  http: {
-   baseURL: "https://weather.visualcrossing.com/"
-  })
-
-type ConnectorWeather @key(fields: "lat long") {
+type Weather @key(fields: "lat long") {
+  lat: String!
+  long: String!
   temperature: Float
   snow: Float
   windSpeed: Float
   conditions: String
-  lat: Float
-  long: Float
 }
 
 type Query {
-  getConnectorWeatherData (city:String, country:String) : ConnectorWeather
+  getWeatherData (city:String, country:String) : Weather
     @connect(
         source: "weatherdata"
         http: { GET: "/VisualCrossingWebServices/rest/services/timeline/{$args.city},{$args.country}?key={$config.visualCrossingApiKey}&include=current&unitGroup=uk" }
@@ -38,18 +40,18 @@ type Query {
         """
       )
 
-  getConnectorWeatherDataByLatLngJoin (lat:Float, long:Float) : ConnectorWeather
+  getWeatherDataByLatLng (lat: String!, long: String!) : Weather
     @connect(
         source: "weatherdata"
         http: { GET: "/VisualCrossingWebServices/rest/services/timeline/{$args.lat},{$args.long}?key={$config.visualCrossingApiKey}&include=current&unitGroup=uk" }
         selection: """
-        lat: latitude
-        long: longitude
+        lat:$args.lat
+        long:$args.long
         $.currentConditions
         {
         snow
-        temperature: temp
-        windSpeed: windspeed
+        temperature:temp
+        windSpeed:windspeed
         conditions
         }
         """

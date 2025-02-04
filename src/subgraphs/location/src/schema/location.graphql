@@ -1,19 +1,19 @@
-extend schema @link(url: "https://specs.apollo.dev/federation/v2.8", import: ["@key", "@external", "@provides", "@shareable", "@requires"])
+extend schema @link(url: "https://specs.apollo.dev/federation/v2.8", import: ["@key"])
 
-type SubgraphAddress {
+type Address {
   shortFormatted: String!
   timezone: String!
   country: String!
   city: String!
-  weather: SubgraphWeather!
 }
 
-type SubgraphWeather @key(fields: "city country") {
-  city: String!
-  country: String!
+type Geo {
+  lat: String!
+  long: String!
+  weather: Weather
 }
 
-type SubgraphGeo {
+type Weather @key(fields: "lat long") {
   lat: String!
   long: String!
 }
@@ -22,7 +22,6 @@ type Query {
   """
   PC*Miler Web Services - Single Search - https://developer.trimblemaps.com/restful-apis/location/single-search/single-search-api/
   """
-  subgraphAddressByGeo(lat: String!, long: String!): SubgraphAddress
-  subgraphAddressAndWeather(lat: String!, long: String!): SubgraphAddress
-  subgraphLocationByAddress(address: String!, city: String!, state: String!): SubgraphGeo
+  addressByGeo(lat: String!, long: String!): Address
+  geoByAddress(address: String!, city: String!, state: String!): Geo
 }

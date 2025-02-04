@@ -1,0 +1,3 @@
+{
+  "query": "query getWeatherData {\n  getWeatherData(city: \"Amsterdam\" country: \"Netherlands\") {\n        conditions\n        snow\n        temperature\n        windSpeed\n    }\n}"
+}
