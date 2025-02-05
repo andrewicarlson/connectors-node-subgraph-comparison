@@ -16,11 +16,10 @@ const server = new ApolloServer({
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4040 },
   context: async () => {
-    const { cache } = server;
 
     return {
       dataSources: {
-        locationAPI: new LocationAPI({ cache })
+        locationAPI: new LocationAPI()
       }
     }
   }

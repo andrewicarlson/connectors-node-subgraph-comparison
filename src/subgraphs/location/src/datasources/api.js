@@ -3,6 +3,10 @@ import { RESTDataSource } from '@apollo/datasource-rest';
 class LocationAPI extends RESTDataSource {
     baseURL = 'https://singlesearch.alk.com/';
 
+    requestDeduplicationPolicyFor() {
+        return { policy: 'do-not-deduplicate' };
+    }
+
     async getAddressByGeo(lat, long) {
         const data = await this.get(`ww/api/search?query=${lat},${long}&matchNamedRoadsOnly=true&maxCleanupMiles=0.2`, {
             headers: {

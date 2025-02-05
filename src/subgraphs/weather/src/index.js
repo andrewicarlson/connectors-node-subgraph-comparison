@@ -16,11 +16,9 @@ const server = new ApolloServer({
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 },
   context: async () => {
-    const { cache } = server;
-
     return {
       dataSources: {
-        weatherAPI: new WeatherAPI({ cache })
+        weatherAPI: new WeatherAPI()
       }
     }
   }
