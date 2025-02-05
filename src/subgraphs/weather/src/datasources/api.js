@@ -10,8 +10,6 @@ class WeatherAPI extends RESTDataSource {
     async getWeather(city, country) {
         const data = await this.get(`VisualCrossingWebServices/rest/services/timeline/${city},${country}?key=${process.env.VISUAL_CROSSING_API_KEY}&include=current&unitGroup=uk`);
         
-        console.log(city, country);
-
         return {
             ...data.currentConditions,
             temperature: data.currentConditions.temp,
