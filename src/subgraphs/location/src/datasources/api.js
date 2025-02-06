@@ -1,7 +1,7 @@
 import { RESTDataSource } from '@apollo/datasource-rest'; 
 
 class LocationAPI extends RESTDataSource {
-    baseURL = 'https://singlesearch.alk.com/';
+    baseURL = process.env.LOCATION_API_URL;
 
     requestDeduplicationPolicyFor() {
         return { policy: 'do-not-deduplicate' };
@@ -11,7 +11,8 @@ class LocationAPI extends RESTDataSource {
         const data = await this.get(`ww/api/search?query=${lat},${long}&matchNamedRoadsOnly=true&maxCleanupMiles=0.2`, {
             headers: {
                 "Authorization": process.env.TRIMBLE_API_KEY
-            }
+            },
+            skipCache: true
         });
         
         return {
@@ -26,7 +27,8 @@ class LocationAPI extends RESTDataSource {
         const data = await this.get(`na/api/search?query=${address},${city}&countries=US&states=${state}`, {
             headers: {
                 "Authorization": process.env.TRIMBLE_API_KEY
-            }
+            },
+            skipCache: true
         });
         
         return {

@@ -10,7 +10,7 @@ extend schema
   @source(
     name: "trimblemaps"
     http: {
-      baseURL: "https://singlesearch.alk.com/"
+      baseURL: "http://localhost:4041"
       headers: [{ name: "Authorization", value: "{$config.trimbleApiKey}" }]
     }
   )

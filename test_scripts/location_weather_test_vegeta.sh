@@ -18,10 +18,10 @@ ADDRESS_BY_GEO_QUERY="addressByGeo"
 WEATHER_QUERY="getWeatherData"
 
 # Number of requests per second
-RATE="25"  # requests per second
-DURATION="1s"  # Test duration
-WORKERS="25"
-MAX_WORKERS="25"
+RATE="0"  # requests per second
+DURATION="30s"  # Test duration
+WORKERS="50"
+MAX_WORKERS="50"
 
 mkdir -p $OUTPUT_DIR
 

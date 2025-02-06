@@ -9,6 +9,9 @@ services:
       - ./src/subgraphs/weather:/app
     ports:
       - 4000:4000
+    depends_on:
+      - weather_service
+      - location_service
   location_subgraph:
     build: ./src/subgraphs/location
     env_file:
@@ -17,6 +20,25 @@ services:
       - ./src/subgraphs/location:/app
     ports:
       - 4040:4040
+    depends_on:
+      - weather_service
+      - location_service
+  weather_service:
+    build: ./src/services/weather
+    env_file:
+      - .env
+    volumes: 
+      - ./src/services/weather:/app
+    ports:
+      - 4001:4001
+  location_service:
+    build: ./src/services/location
+    env_file:
+      - .env
+    volumes:
+      - ./src/services/location:/app
+    ports:
+      - 4041:4041
  
 volumes:
   pgdata:

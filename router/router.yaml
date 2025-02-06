@@ -23,6 +23,8 @@ preview_connectors:
     weather:
       $config:
         visualCrossingApiKey: "${env.VISUAL_CROSSING_API_KEY}"
+        weatherApiUrl: "${env.WEATHER_API_URL}"
     location:
       $config:
         trimbleApiKey: "${env.TRIMBLE_API_KEY}"
+        locationApiUrl: "${env.LOCATION_API_URL}"

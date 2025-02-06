@@ -9,7 +9,7 @@ extend schema
   @source(
     name: "weatherdata"
     http: {
-      baseURL: "https://weather.visualcrossing.com/"
+      baseURL: "http://localhost:4001"
     }
   )
 
